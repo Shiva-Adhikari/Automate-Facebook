@@ -10,6 +10,7 @@ class ReelUpload:
         self.video_id = None
         self.upload_url = None
 
+# Step 1: Initialize an Upload Session
     def initialize(self):
         print('Initializing an Upload Session...')
 
@@ -22,15 +23,17 @@ class ReelUpload:
         response = requests.post(url, headers=headers, json=data)
 
         if response.ok == True:
-            print('done')
             data = response.json()
             print(data)
+            print('Finished Initialize\n')
+            # print(data)
             self.video_id = data.get('video_id')
             self.upload_url = data.get('upload_url')
         else:
             print('error')
             print(response.json())
 
+# Step 2: Upload the Video
     def ready_upload(self):
         print("Ready to Upload reels...")
         # folder_path = os.getcwd()
@@ -80,28 +83,57 @@ class ReelUpload:
 
         if response.ok == True:
             data = response.json()
-            print('data json:', data)
-            print('Reels is ready to Upload')
+            # print('data json:', data)
+            # self.response_ok = data.get('success')
+            # print('response ok: ',self.response_ok)
+            print('response json', response.json())
+            print('Reels is ready to Upload\n')
         else:
-            print('Failed to Upload Reels')
+            print('Failed to Ready to Upload Reels\n')
             print(response.json())
-
 
     def upload_status(self):
         print("check video status...")
-        print('upload url: ', self.upload_url)
-        print('video id: ',self.video_id)
+        # print('upload url: ', self.upload_url)
+        # print('video id: ',self.video_id)
         params = {
             'fields': 'status',
             'access_token': self.access_token
         }
         response = requests.get(self.upload_url, params=params)
         if response.ok:
-            print('response status OK')
+            # print(response.json())
+            print('response status: ', response.json())
+            print('response status OK\n')
         else:
-            print('response status failed')
+            print('response status failed\n')
+
+# Step 3: Publish the Reel
+    def publish_reel(self):
+        print('Uploading Reel...')
+        description = 'awesome'
+
+        url = f'https://graph.facebook.com/v21.0/{self.page_id}/video_reels'
+        params = {
+            'access_token': self.access_token,
+            'video_id': self.video_id,
+            'upload_phase': 'finish',
+            'video_state': 'PUBLISHED',
+            'description': description,
+            'title': 'awesome ti'
+        }
+        response = requests.post(url, params=params)
+
+        if response.ok:
+            print('upload reel response json: ', response.json())
+            print('Successfully Uploaded reel\n')
+        else:
+            print('Failed to Upload reel\n')
+
 if __name__ == '__main__':
     reel = ReelUpload()
     reel.initialize()
     reel.ready_upload()
     reel.upload_status()
+    reel.publish_reel()
+    # reel.upload_status()
