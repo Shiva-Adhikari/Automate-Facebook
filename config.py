@@ -1,9 +1,9 @@
 # 434531093070817
 
-access_token = 'EAAUGt7pgQ6QBOwpmlqwTSvFUwvKg61XU1MZAgHWULIbayRjXQq9REY38Vx4rHf4XYrppTiA9kpVLHDbhd8CwkhmbjexcExpJ91WV8F372NxPZCHMZBNRUAzwSGX3bkB4SaLq6WUTFa821UPj8rc0ZBDWZBZBk2sm8zN8QzmO5JsWaArZA1ZC8fsx6RLQV98bjRgEbfNguCinkCJixj9hItZAeulKJDgWqmRzcj8d5Ij3M'
+access_token = ''
 
-page_id = '434531093070817'
+page_id = ''
 
-app_id = '1414761059206052'
+app_id = ''
 
-app_secret = '406009f312ece020abaa332b0c4b2ae8'
+app_secret = ''
